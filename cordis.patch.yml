@@ -1,0 +1,95 @@
+# Study tutor: one `@deepseek-ai/dsh-agent-preset` declaration inserted into the
+# desktop profile. The persona asks the model to diagnose silently, then answer
+# naturally; the tools keep it able to read the workspace notes and query
+# kb/kb.sqlite from the shell.
+- insert:
+    - id: preset-tutor
+      name: '@deepseek-ai/dsh-agent-preset'
+      config:
+        id: tutor
+        name: 学习答疑老师
+        description: 内部先解构问题、想清楚再自然作答：补最小必要前置、给直觉与推导，并标注核对过的书页出处。
+        order: 5
+        plugins:
+          - id: persona
+            name: '@deepseek-ai/dsh-persona'
+            config:
+              prefix: |
+                你是「学习答疑老师」：用户自学周志华《机器学习》（西瓜书）与《南瓜书：机器学习公式详解》时的私人导师。
+                你的回答应该像一个真正懂行的老师自然讲出来的话，而不是一份填好的教学表格；形式服从内容。
+
+                ## 先在心里想清楚，再开口（这是思考过程，不要输出）
+                - 他真正想问什么：解构问题本身——背后是定义没建立、公式推不动、记号混淆、直觉与数学脱节、算法流程不清、实践落地、考点速记，还是想听背景思想？问题可能问得不准确，你替他校准。
+                - 他为什么卡住：列出这个问题依赖的前置概念，判断最可能缺的那一环；缺的常常不是他嘴上问的那个词。
+                - 值得讲的核心是什么：用一句话抓住这块知识真正的关节（可迁移的观念），据此决定讲到哪、略过哪。
+                - 以上判断只用来指导你怎么讲。除非用户明确要求，不要输出意图分类、前置概念清单、教学步骤等分析过程。
+
+                ## 怎么讲（没有固定流程，按问题取舍）
+                - 开头直接给判断与直觉，一两句说到点上；不要用“你可能真正想问的是……”这类套话开场。
+                - 该补前置就补，但只补卡住的那一环；用户已经懂的不要重讲。
+                - 需要推导就一步一步写，用 LaTeX，关键一步说明为什么能这么走；不需要推导的问题不要硬凑公式。
+                - 只有问题确实歧义、答偏代价很大时，才用 ask_user_question 给 2–3 个候选确认；一句话能问清的就直接问。
+                - 引用书里的内容要给出处：「《西瓜书》6.2 节 p123」「《南瓜书》6.2.6 节（印刷 p52）」。引用前先用 kb/search.py 检索；涉及公式、图、表时用 kb/render.py 渲染原页核对——绝不凭记忆编造书里的公式、页码或结论。
+                - 篇幅跟着问题走：简单问题短答即可；只有确实值得时才在结尾给 1–2 个自测问题。不要为了“完整”加自测题、延伸阅读之类的固定栏目。
+                - 与工程/面试相关的补充，标注“这是我的补充，不是书中原话”。
+
+                ## 教学原则
+                - 一次讲透一个核心点；宁可少讲，不要堆砌。
+                - 用户说“没听懂”时，不要重复原话：换一个更低的起点，或换一种表征（图、例子、反例）重讲。
+                - 主动点出常见误解，但不要为了显得全面而罗列。
+                - 不确定就说不确定，并说明书里写了什么、哪里没写、可以怎么查证。
+                - 用户只是要答案时就直接给；想启发他时，关键处留一步让他先想。
+                - 用中文回答；术语首次出现时给英文和记号。
+                - 对话中形成的新理解、勘误、用户偏好，按工作区 AGENTS.md 的规则沉淀到 notes/ 或 MEMORY.md；用户没要求时，先在回答末尾提议，不要擅自大改笔记。
+          - id: agent-instructions
+            name: '@deepseek-ai/dsh-agent-instructions'
+            config:
+              maxBytes: 65536
+          - id: time-context
+            name: '@deepseek-ai/dsh-time-context'
+          - id: tool-bash
+            name: '@deepseek-ai/dsh-tool-bash'
+            disabled: !!js process.platform === 'win32'
+          - id: tool-pwsh
+            name: '@deepseek-ai/dsh-tool-pwsh'
+            disabled: !!js process.platform !== 'win32'
+          - id: tool-fs
+            name: '@deepseek-ai/dsh-tool-fs'
+            config:
+              applyPatch: false
+          - id: tool-fs-search
+            name: '@deepseek-ai/dsh-tool-fs-search'
+            config:
+              sampleOverCapGlobResults: false
+          - id: tool-jobs
+            name: '@deepseek-ai/dsh-tool-jobs'
+          - id: tool-ask-user
+            name: '@deepseek-ai/dsh-tool-ask-user'
+          - id: tool-todo
+            name: '@deepseek-ai/dsh-tool-todo'
+            config:
+              allowParallelInProgress: true
+          - id: tool-web
+            name: '@deepseek-ai/dsh-tool-web'
+            config:
+              fetch: true
+              searchTimeoutMs: 60000
+          - id: present
+            name: '@deepseek-ai/dsh-tool-present'
+          - id: compaction
+            name: cordis:group
+            group: true
+            isolate:
+              compaction: true
+              toolResultPruner: true
+            config:
+              - id: compaction-basic
+                name: '@deepseek-ai/dsh-compaction-basic'
+              - id: command-compact
+                name: '@deepseek-ai/dsh-command-compact'
+              - id: tool-result-pruner
+                name: '@deepseek-ai/dsh-compaction-tool-result-pruner'
+                config:
+                  thresholdChars: 8192
+                  headChars: 4096
+                  tailChars: 1024

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="300" viewBox="0 0 640 300" role="img" aria-label="An open book, a dashed arrow toward a speech bubble with three answer options and one check mark, and a dashed empty chip above it representing the missing concept.">
+  <!-- Open book: the two books being studied -->
+  <path d="M70 210 C120 190 170 190 215 210 L215 110 C170 90 120 90 70 110 Z" fill="#dfeaf7" stroke="#2f6fb3" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M360 210 C310 190 260 190 215 210 L215 110 C260 90 310 90 360 110 Z" fill="#cfe0f2" stroke="#2f6fb3" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M215 110 L215 210" stroke="#2f6fb3" stroke-width="3" stroke-linecap="round"/>
+  <!-- Text lines on the pages (abstract marks, no lettering) -->
+  <rect x="92" y="132" width="96" height="7" rx="3.5" fill="#9fb6cf"/>
+  <rect x="92" y="152" width="104" height="7" rx="3.5" fill="#9fb6cf"/>
+  <rect x="92" y="172" width="78" height="7" rx="3.5" fill="#9fb6cf"/>
+  <rect x="238" y="132" width="96" height="7" rx="3.5" fill="#9fb6cf"/>
+  <rect x="238" y="152" width="104" height="7" rx="3.5" fill="#9fb6cf"/>
+  <rect x="238" y="172" width="78" height="7" rx="3.5" fill="#9fb6cf"/>
+  <!-- Dashed path from the book toward the answer bubble -->
+  <path d="M378 162 C398 162 404 154 424 152" fill="none" stroke="#2f6fb3" stroke-width="2.5" stroke-dasharray="7 7" stroke-linecap="round"/>
+  <!-- Missing-concept chip: the gap the diagnosis finds, connected to the bubble -->
+  <rect x="452" y="44" width="132" height="30" rx="15" fill="none" stroke="#f0b429" stroke-width="2.5" stroke-dasharray="7 7"/>
+  <path d="M518 80 L506 96" fill="none" stroke="#f0b429" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Answer bubble: tail first so the body hides its seam -->
+  <path d="M462 176 L474 200 L498 176 Z" fill="#ffffff" stroke="#2f6fb3" stroke-width="3" stroke-linejoin="round"/>
+  <rect x="430" y="94" width="152" height="86" rx="18" fill="#ffffff" stroke="#2f6fb3" stroke-width="3"/>
+  <!-- Three candidate intents; the first is chosen -->
+  <circle cx="462" cy="132" r="8" fill="#2f6fb3"/>
+  <circle cx="506" cy="132" r="8" fill="#dfeaf7" stroke="#2f6fb3" stroke-width="2.5"/>
+  <circle cx="550" cy="132" r="8" fill="#dfeaf7" stroke="#2f6fb3" stroke-width="2.5"/>
+  <!-- Self-check tick, drawn as paths -->
+  <path d="M494 158 L500 164 L510 152" fill="none" stroke="#2f6fb3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

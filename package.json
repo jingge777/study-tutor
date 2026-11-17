@@ -1,0 +1,13 @@
+{
+  "name": "dsh-study-tutor",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Adds the Study tutor agent preset: it deconstructs the question internally, then answers naturally with intuition, only the necessary derivations, and verified page citations from the two machine-learning books.",
+  "exports": {
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": ["cordis.patch.yml", "locale/*.json", "docs", "icon.svg"],
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" role="img" aria-label="An open book with a speech bubble above it.">
+  <path d="M5 26 C9 24 14 24 18 26 L18 13.5 C14 11.5 9 11.5 5 13.5 Z" fill="#dfeaf7" stroke="#2f6fb3" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M31 26 C27 24 22 24 18 26 L18 13.5 C22 11.5 27 11.5 31 13.5 Z" fill="#cfe0f2" stroke="#2f6fb3" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M18 13.5 L18 26" stroke="#2f6fb3" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M26.4 9.8 L24.6 12.9 L28.2 11.6 Z" fill="#f0b429"/>
+  <rect x="23" y="3.5" width="10" height="7.4" rx="2.6" fill="#f0b429"/>
+</svg>

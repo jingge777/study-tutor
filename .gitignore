@@ -1,0 +1,12 @@
+# DSH profile artifacts
+node_modules/
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# local check renders
+docs/_*_check.png

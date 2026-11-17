@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Study tutor",
+    "description": "Adds the Study tutor (学习答疑老师) agent preset for self-study of the two machine-learning books in this workspace. It deconstructs your question internally—what you are really asking and which prerequisite is missing—then answers naturally, with intuition, only the necessary derivations, and citations to pages it verified against the PDFs. No fixed script; short questions get short answers. Choose 学习答疑老师 in the agent selector of a new session. Reads the workspace notes and kb/ search library through the shell; uses web search only when you ask for material outside the books.",
+    "detail": "docs/DETAIL.md"
+  }
+}
